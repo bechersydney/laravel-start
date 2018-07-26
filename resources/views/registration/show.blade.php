@@ -8,5 +8,10 @@
          <li class="list-item">{{$users->phone_number}}</li>
       </ul>
          <a href="/user/{{$users->id}}/edit" class="btn btn-warning">Edit</a>
+
+         {!!Form::open(['action'=>['RegistrationController@destroy',$users->id, 'method'=>'POST']])!!}
+            {!!Form::submit('Delete',['class'=>'btn btn-danger ml-auto'])!!}
+            {!!Form::hidden('_method', 'DELETE')!!}
+         {!!Form::close()!!}
    </div>
 @endsection

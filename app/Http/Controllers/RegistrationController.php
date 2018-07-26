@@ -50,7 +50,7 @@ class RegistrationController extends Controller
         $user->phone_number = $request->input('pnumber');
         $user->save();
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Registered Successfully');
 
     }
 
@@ -103,7 +103,7 @@ class RegistrationController extends Controller
         $user->phone_number = $request->input('pnumber');
         $user->save();
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Registered Updated Successfully');
 
     }
 
@@ -115,6 +115,9 @@ class RegistrationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Registration::find($id);
+        $user->delete();
+        return redirect('/user');
+
     }
 }

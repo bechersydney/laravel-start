@@ -10,6 +10,9 @@
    
    </head>
    <body>
-      @yield('content')
+      <div class="container">
+         @include('includes.message')
+         @yield('content')
+      </div>
    </body>
 </html>
