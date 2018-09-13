@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $article = Article::all();
+        $article = Article::paginate(5);
         return ArticleResource::collection($article);
     }
 
@@ -46,8 +46,12 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
+        
         $article = Article::findOrFail($id);
-        return new ArticleResource($article);
+        if($article){
+            return new ArticleResource($article);
+        }
+        return response()->json(['status'=>'File cannot be found'],400);
     }
 
     /**
@@ -60,8 +64,9 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         if ($article->delete()) {
-            return new ArticleResource($article);
+            $deleteArticle = new ArticleResource($article);
         }
+        return response()->json(['status'=>'Successfully deleted'],200);
 
     }
 }
